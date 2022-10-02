@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\list_item_event_layout.xml",
+        "source": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\src\\main\\res\\layout\\list_item_event_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\event_fragment.xml",
+        "source": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\src\\main\\res\\layout\\event_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_add_event.xml",
+        "source": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\src\\main\\res\\layout\\fragment_add_event.xml"
+    },
+    {
+        "merged": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\list_item_month_event_layout.xml",
+        "source": "C:\\Users\\spunk\\AndroidStudioProjects\\Calendar\\app\\src\\main\\res\\layout\\list_item_month_event_layout.xml"
+    }
+]

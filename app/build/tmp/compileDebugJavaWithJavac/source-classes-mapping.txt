@@ -1,0 +1,14 @@
+com/example/calendar/databinding/ActivityMainBinding.java
+ com.example.calendar.databinding.ActivityMainBinding
+com/example/calendar/databinding/ListItemMonthEventLayoutBinding.java
+ com.example.calendar.databinding.ListItemMonthEventLayoutBinding
+com/example/calendar/databinding/EventFragmentBinding.java
+ com.example.calendar.databinding.EventFragmentBinding
+com/example/calendar/databinding/ListItemEventLayoutBinding.java
+ com.example.calendar.databinding.ListItemEventLayoutBinding
+com/example/calendar/BuildConfig.java
+ com.example.calendar.BuildConfig
+com/example/calendar/DataBindingTriggerClass.java
+ com.example.calendar.DataBindingTriggerClass
+com/example/calendar/databinding/FragmentAddEventBinding.java
+ com.example.calendar.databinding.FragmentAddEventBinding
