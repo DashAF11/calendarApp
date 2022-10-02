@@ -9,11 +9,11 @@ interface EventDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertEvent(vararg event: EventEntity)
 
-    @Query("SELECT * FROM EventTable ")
-    fun getAllEventMonth(): Flow<EventEntity>
+    @Query("SELECT * FROM EventTable")
+    fun getAllEventMonth(): Flow<List<EventEntity>>
 
     @Query("SELECT * FROM EventTable WHERE event_month =:month")
-    fun getAllEventByMonth(month: Int): Flow<List<EventEntity>>
+    fun getAllEventByMonth(month: Long): Flow<List<EventEntity>>
 
     @Delete
     suspend fun delete(event: EventEntity)

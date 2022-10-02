@@ -103,12 +103,12 @@ public final class EventDao_Impl implements EventDao {
   }
 
   @Override
-  public Flow<EventEntity> getAllEventMonth() {
-    final String _sql = "SELECT * FROM EventTable ";
+  public Flow<List<EventEntity>> getAllEventMonth() {
+    final String _sql = "SELECT * FROM EventTable";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return CoroutinesRoom.createFlow(__db, false, new String[]{"EventTable"}, new Callable<EventEntity>() {
+    return CoroutinesRoom.createFlow(__db, false, new String[]{"EventTable"}, new Callable<List<EventEntity>>() {
       @Override
-      public EventEntity call() throws Exception {
+      public List<EventEntity> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfEventName = CursorUtil.getColumnIndexOrThrow(_cursor, "event_name");
@@ -117,16 +117,17 @@ public final class EventDao_Impl implements EventDao {
           final int _cursorIndexOfEventEndTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_end_time");
           final int _cursorIndexOfEventDiffTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_diff_time");
           final int _cursorIndexOfEventTimeStamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_timestamp");
-          final EventEntity _result;
-          if(_cursor.moveToFirst()) {
+          final List<EventEntity> _result = new ArrayList<EventEntity>(_cursor.getCount());
+          while(_cursor.moveToNext()) {
+            final EventEntity _item;
             final String _tmpEventName;
             if (_cursor.isNull(_cursorIndexOfEventName)) {
               _tmpEventName = null;
             } else {
               _tmpEventName = _cursor.getString(_cursorIndexOfEventName);
             }
-            final int _tmpEventMonth;
-            _tmpEventMonth = _cursor.getInt(_cursorIndexOfEventMonth);
+            final long _tmpEventMonth;
+            _tmpEventMonth = _cursor.getLong(_cursorIndexOfEventMonth);
             final long _tmpEventStartTimestamp;
             _tmpEventStartTimestamp = _cursor.getLong(_cursorIndexOfEventStartTimestamp);
             final long _tmpEventEndTimestamp;
@@ -135,9 +136,8 @@ public final class EventDao_Impl implements EventDao {
             _tmpEventDiffTimestamp = _cursor.getLong(_cursorIndexOfEventDiffTimestamp);
             final long _tmpEventTimeStamp;
             _tmpEventTimeStamp = _cursor.getLong(_cursorIndexOfEventTimeStamp);
-            _result = new EventEntity(_tmpEventName,_tmpEventMonth,_tmpEventStartTimestamp,_tmpEventEndTimestamp,_tmpEventDiffTimestamp,_tmpEventTimeStamp);
-          } else {
-            _result = null;
+            _item = new EventEntity(_tmpEventName,_tmpEventMonth,_tmpEventStartTimestamp,_tmpEventEndTimestamp,_tmpEventDiffTimestamp,_tmpEventTimeStamp);
+            _result.add(_item);
           }
           return _result;
         } finally {
@@ -153,7 +153,7 @@ public final class EventDao_Impl implements EventDao {
   }
 
   @Override
-  public Flow<List<EventEntity>> getAllEventByMonth(final int month) {
+  public Flow<List<EventEntity>> getAllEventByMonth(final long month) {
     final String _sql = "SELECT * FROM EventTable WHERE event_month =?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -178,8 +178,8 @@ public final class EventDao_Impl implements EventDao {
             } else {
               _tmpEventName = _cursor.getString(_cursorIndexOfEventName);
             }
-            final int _tmpEventMonth;
-            _tmpEventMonth = _cursor.getInt(_cursorIndexOfEventMonth);
+            final long _tmpEventMonth;
+            _tmpEventMonth = _cursor.getLong(_cursorIndexOfEventMonth);
             final long _tmpEventStartTimestamp;
             _tmpEventStartTimestamp = _cursor.getLong(_cursorIndexOfEventStartTimestamp);
             final long _tmpEventEndTimestamp;

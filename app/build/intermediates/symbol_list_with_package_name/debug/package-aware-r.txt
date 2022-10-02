@@ -3041,7 +3041,6 @@ id transition_transform
 id triangle
 id tvAddCalendarEvent
 id tvDuration
-id tvDurationUnit
 id tvEndTime
 id tvEventTime
 id tvEventTitle
@@ -3313,8 +3312,10 @@ string character_counter_pattern
 string chip_text
 string clear_text_end_icon_content_description
 string create_event
+string dont_select_past_time
 string eg_interview_for_android
 string end
+string enter_meeting_title
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
@@ -3408,6 +3409,9 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string search_menu_title
 string select_date
+string select_end_time
+string select_meeting_date
+string select_start_time
 string start
 string status_bar_notification_info_overflow
 string to

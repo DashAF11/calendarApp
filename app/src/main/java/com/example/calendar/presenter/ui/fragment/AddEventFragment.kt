@@ -19,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.math.abs
 
-
 @AndroidEntryPoint
 class AddEventFragment : Fragment() {
     private lateinit var binding: FragmentAddEventBinding
@@ -62,14 +61,12 @@ class AddEventFragment : Fragment() {
                     DatePickerDialog(
                         requireActivity(), DatePickerDialog.OnDateSetListener
                         { _, year, monthOfYear, dayOfMonth ->
-                            val mon: String
-                            val day: String
-                            mon = if (monthOfYear < 10) {
-                                "0" + (monthOfYear + 1)
+                            val mon: String = if (monthOfYear + 1 < 10) {
+                                "0${monthOfYear + 1}"
                             } else {
                                 "" + (monthOfYear + 1)
                             }
-                            day = if (dayOfMonth < 10) {
+                            val day: String = if (dayOfMonth < 10) {
                                 "0$dayOfMonth"
                             } else {
                                 "" + dayOfMonth
@@ -119,7 +116,14 @@ class AddEventFragment : Fragment() {
                             EventState.AddEvent(
                                 EventEntity(
                                     eventName = binding.etMeetingTitle.string,
-                                    eventMonth = selectedMonth,
+                                    eventMonth = getTimeInMillisFormat(
+                                        selectedYear,
+                                        selectedMonth.toString(),
+                                        selectedDayOfMonth.toString(),
+                                        "0",
+                                        "0",
+                                        "AM"
+                                    ),
                                     eventStartTimestamp = startTimeInMillis,
                                     eventEndTimestamp = endTimeInMilles,
                                     eventDiffTimestamp = abs(startTimeInMillis - endTimeInMilles),
@@ -149,40 +153,28 @@ class AddEventFragment : Fragment() {
                     datetime[Calendar.MINUTE] = minute
 
                     if (selectedMonth == month + 1 && selectedDayOfMonth != day) {
-                        var hourOfDay = hourOfDay
-                        val min: String
-                        val hrs: String = if (hourOfDay < 10) {
-                            "0$hourOfDay"
-                        } else {
-                            "" + hourOfDay
-                        }
-                        min = if (minute < 10) {
-                            "0$minute"
-                        } else {
-                            "" + minute
-                        }
-
+                        var hour = hourOfDay
                         timeUnit = "AM"
                         var mm_precede = ""
                         var hr_precede = ""
-                        if (hourOfDay >= 12) {
+                        if (hour >= 12) {
                             timeUnit = "PM"
-                            if (hourOfDay in 13..23) {
-                                hourOfDay -= 12
+                            if (hour in 13..23) {
+                                hour -= 12
                             } else {
-                                hourOfDay = 12
+                                hour = 12
                             }
-                        } else if (hourOfDay == 0) {
-                            hourOfDay = 12
+                        } else if (hour == 0) {
+                            hour = 12
                         }
-                        if (hourOfDay < 10) {
+                        if (hour < 10) {
                             hr_precede = "0"
                         }
                         if (minute < 10) {
                             mm_precede = "0"
                         }
                         if (isStartTime) {
-                            eventStartHour = "$hr_precede$hourOfDay"
+                            eventStartHour = "$hr_precede$hour"
                             eventStartMin = "$mm_precede$minute"
 
                             binding.tvStartTime.text = "$eventStartHour:$eventStartMin $timeUnit"
@@ -196,7 +188,7 @@ class AddEventFragment : Fragment() {
                                 timeUnit,
                             )
                         } else {
-                            eventEndHour = "$hr_precede$hourOfDay"
+                            eventEndHour = "$hr_precede$hour"
                             eventEndMin = "$mm_precede$minute"
                             binding.tvEndTime.text = "$eventEndHour:$eventEndMin $timeUnit"
 
@@ -212,6 +204,56 @@ class AddEventFragment : Fragment() {
                     } else {
                         if (datetime.timeInMillis <= c.timeInMillis) {
                             toast(getString(R.string.dont_select_past_time))
+                        } else {
+                            var hour = hourOfDay
+                            timeUnit = "AM"
+                            var mm_precede = ""
+                            var hr_precede = ""
+                            if (hour >= 12) {
+                                timeUnit = "PM"
+                                if (hour in 13..23) {
+                                    hour -= 12
+                                } else {
+                                    hour = 12
+                                }
+                            } else if (hour == 0) {
+                                hour = 12
+                            }
+                            if (hour < 10) {
+                                hr_precede = "0"
+                            }
+                            if (minute < 10) {
+                                mm_precede = "0"
+                            }
+                            if (isStartTime) {
+                                eventStartHour = "$hr_precede$hour"
+                                eventStartMin = "$mm_precede$minute"
+
+                                binding.tvStartTime.text =
+                                    "$eventStartHour:$eventStartMin $timeUnit"
+
+                                startTimeInMillis = getTimeInMillisFormat(
+                                    selectedYear,
+                                    selectedMonth.toString(),
+                                    selectedDayOfMonth.toString(),
+                                    eventStartHour,
+                                    eventStartMin,
+                                    timeUnit,
+                                )
+                            } else {
+                                eventEndHour = "$hr_precede$hour"
+                                eventEndMin = "$mm_precede$minute"
+                                binding.tvEndTime.text = "$eventEndHour:$eventEndMin $timeUnit"
+
+                                endTimeInMilles = getTimeInMillisFormat(
+                                    selectedYear,
+                                    selectedMonth.toString(),
+                                    selectedDayOfMonth.toString(),
+                                    eventEndHour,
+                                    eventEndMin,
+                                    timeUnit,
+                                )
+                            }
                         }
                     }
                 }, hour, minute, false

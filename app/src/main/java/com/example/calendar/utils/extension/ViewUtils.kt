@@ -7,7 +7,9 @@ import android.view.animation.CycleInterpolator
 import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -46,6 +48,9 @@ fun shakeError(): TranslateAnimation {
     shake.interpolator = CycleInterpolator(2f)
     return shake
 }
+
+fun TextView.drawableEnd(@DrawableRes id: Int) =
+    setCompoundDrawablesWithIntrinsicBounds(0, 0, id, 0)
 
 
 

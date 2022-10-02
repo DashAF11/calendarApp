@@ -1,18 +1,31 @@
 package com.example.calendar.utils.extension
 
+import android.text.format.DateFormat
 import java.util.*
 
-fun getTimeInHourMin(timeInMillis: Long): String {
-    val millis: Long = timeInMillis
-    val hours = (millis / (1000 * 60 * 60)).toInt()
-    val mins = (millis / (1000 * 60)).toInt() % 60
-    return "$hours:$mins"
+fun getMonthAndDate(timestamp: Long): String {
+    val calendar = Calendar.getInstance(Locale.ENGLISH)
+    calendar.timeInMillis = timestamp
+    return DateFormat.format("MMM dd", calendar).toString()
 }
 
-fun getMonthName(month: Int): String {
-    val arrayOfMonth =
-        arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-    return arrayOfMonth[month - 1]
+fun getTimeFormat(timestamp: Long): String {
+    val calendar = Calendar.getInstance(Locale.ENGLISH)
+    calendar.timeInMillis = timestamp
+    return DateFormat.format("hh:mm aaa", calendar).toString()
+}
+
+fun getDuration(timestamp: Long): String {
+    val hours = (timestamp / (1000 * 60 * 60)).toInt()
+    val mins = (timestamp / (1000 * 60) % 60).toInt()
+
+    val diff = if (hours != 0) {
+        "$hours.$mins hrs"
+    } else {
+        "$mins min"
+    }
+
+    return diff
 }
 
 fun getTimeInMillisFormat(

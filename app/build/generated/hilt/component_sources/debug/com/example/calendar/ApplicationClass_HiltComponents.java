@@ -4,6 +4,7 @@ import com.example.calendar.di.AppModule;
 import com.example.calendar.di.DatabaseModule;
 import com.example.calendar.presenter.ui.activity.MainActivity_GeneratedInjector;
 import com.example.calendar.presenter.ui.fragment.AddEventFragment_GeneratedInjector;
+import com.example.calendar.presenter.ui.fragment.EventFragment_GeneratedInjector;
 import com.example.calendar.presenter.ui.viewmodel.EventViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
@@ -213,6 +214,7 @@ public final class ApplicationClass_HiltComponents {
   )
   @FragmentScoped
   public abstract static class FragmentC implements AddEventFragment_GeneratedInjector,
+      EventFragment_GeneratedInjector,
       FragmentComponent,
       DefaultViewModelFactories.FragmentEntryPoint,
       ViewComponentManager.ViewWithFragmentComponentBuilderEntryPoint,

@@ -16,6 +16,7 @@ import com.example.calendar.di.DatabaseModule_ProvideCalendarDatabaseFactory;
 import com.example.calendar.di.DatabaseModule_ProvideEventDaoFactory;
 import com.example.calendar.presenter.ui.activity.MainActivity;
 import com.example.calendar.presenter.ui.fragment.AddEventFragment;
+import com.example.calendar.presenter.ui.fragment.EventFragment;
 import com.example.calendar.presenter.ui.viewmodel.EventViewModel;
 import com.example.calendar.presenter.ui.viewmodel.EventViewModel_HiltModules_KeyModule_ProvideFactory;
 import dagger.hilt.android.ActivityRetainedLifecycle;
@@ -357,6 +358,10 @@ public final class DaggerApplicationClass_HiltComponents_SingletonC extends Appl
 
     @Override
     public void injectAddEventFragment(AddEventFragment addEventFragment) {
+    }
+
+    @Override
+    public void injectEventFragment(EventFragment eventFragment) {
     }
 
     @Override
