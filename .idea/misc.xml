@@ -14,8 +14,11 @@
         <entry key="..\:/Users/spunk/AndroidStudioProjects/Calendar/app/src/main/res/layout/activity_main.xml" value="0.1287037037037037" />
         <entry key="..\:/Users/spunk/AndroidStudioProjects/Calendar/app/src/main/res/layout/event_fragment.xml" value="0.264" />
         <entry key="..\:/Users/spunk/AndroidStudioProjects/Calendar/app/src/main/res/layout/fragment_add_event.xml" value="0.264" />
+        <entry key="..\:/Users/spunk/AndroidStudioProjects/Calendar/app/src/main/res/layout/fragment_event_fragment.xml" value="0.1287037037037037" />
         <entry key="..\:/Users/spunk/AndroidStudioProjects/Calendar/app/src/main/res/layout/list_item_event_layout.xml" value="0.4" />
         <entry key="..\:/Users/spunk/AndroidStudioProjects/Calendar/app/src/main/res/layout/list_item_month_event_layout.xml" value="0.264" />
+        <entry key="..\:/Users/spunk/AndroidStudioProjects/Calendar/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.13802083333333334" />
+        <entry key="..\:/Users/spunk/AndroidStudioProjects/Calendar/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.13802083333333334" />
       </map>
     </option>
   </component>

@@ -1,13 +1,47 @@
 com/example/calendar/databinding/ActivityMainBinding.java
  com.example.calendar.databinding.ActivityMainBinding
+com/example/calendar/di/DatabaseModule_ProvideEventDaoFactory.java
+ com.example.calendar.di.DatabaseModule_ProvideEventDaoFactory
+androidx/databinding/DataBinderMapperImpl.java
+ androidx.databinding.DataBinderMapperImpl
+com/example/calendar/data/local/db/dao/EventDao_Impl.java
+ com.example.calendar.data.local.db.dao.EventDao_Impl
+ com.example.calendar.data.local.db.dao.EventDao_Impl$1
+ com.example.calendar.data.local.db.dao.EventDao_Impl$2
+ com.example.calendar.data.local.db.dao.EventDao_Impl$3
+ com.example.calendar.data.local.db.dao.EventDao_Impl$4
+ com.example.calendar.data.local.db.dao.EventDao_Impl$5
+ com.example.calendar.data.local.db.dao.EventDao_Impl$6
+androidx/databinding/library/baseAdapters/BR.java
+ androidx.databinding.library.baseAdapters.BR
+hilt_aggregated_deps/_com_example_calendar_di_DatabaseModule.java
+ hilt_aggregated_deps._com_example_calendar_di_DatabaseModule
+com/example/calendar/DataBinderMapperImpl.java
+ com.example.calendar.DataBinderMapperImpl
+ com.example.calendar.DataBinderMapperImpl$InnerBrLookup
+ com.example.calendar.DataBinderMapperImpl$InnerLayoutIdLookup
+com/example/calendar/di/DatabaseModule_ProvideCalendarDatabaseFactory.java
+ com.example.calendar.di.DatabaseModule_ProvideCalendarDatabaseFactory
+com/example/calendar/databinding/FragmentEventFragmentBinding.java
+ com.example.calendar.databinding.FragmentEventFragmentBinding
+hilt_aggregated_deps/_com_example_calendar_di_AppModule.java
+ hilt_aggregated_deps._com_example_calendar_di_AppModule
+com/example/calendar/di/AppModule_ProvidesExternalScopeFactory.java
+ com.example.calendar.di.AppModule_ProvidesExternalScopeFactory
+ com.example.calendar.di.AppModule_ProvidesExternalScopeFactory$InstanceHolder
 com/example/calendar/databinding/ListItemMonthEventLayoutBinding.java
  com.example.calendar.databinding.ListItemMonthEventLayoutBinding
-com/example/calendar/databinding/EventFragmentBinding.java
- com.example.calendar.databinding.EventFragmentBinding
+com/example/calendar/data/local/db/EventDatabase_Impl.java
+ com.example.calendar.data.local.db.EventDatabase_Impl
+ com.example.calendar.data.local.db.EventDatabase_Impl$1
 com/example/calendar/databinding/ListItemEventLayoutBinding.java
  com.example.calendar.databinding.ListItemEventLayoutBinding
 com/example/calendar/BuildConfig.java
  com.example.calendar.BuildConfig
+com/example/calendar/BR.java
+ com.example.calendar.BR
+androidx/databinding/DataBindingComponent.java
+ androidx.databinding.DataBindingComponent
 com/example/calendar/DataBindingTriggerClass.java
  com.example.calendar.DataBindingTriggerClass
 com/example/calendar/databinding/FragmentAddEventBinding.java

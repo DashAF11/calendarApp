@@ -9,10 +9,12 @@
         android:id="@+id/eventFragment"
         android:name="com.example.calendar.presenter.ui.fragment.EventFragment"
         android:label="event_fragment"
-        tools:layout="@layout/event_fragment">
+        tools:layout="@layout/fragment_event_fragment">
         <action
             android:id="@+id/action_eventFragment_to_addEventFragment"
             app:destination="@id/addEventFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/eventFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment

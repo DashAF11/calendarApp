@@ -1292,6 +1292,7 @@ color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color ic_launcher_background
 color light_black
 color m3_appbar_overlay_color
 color m3_assist_chip_icon_tint_color
@@ -2490,7 +2491,6 @@ drawable ic_arrow_up_24
 drawable ic_calendar
 drawable ic_clock_black_24dp
 drawable ic_keyboard_black_24dp
-drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
@@ -3181,8 +3181,8 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
-layout event_fragment
 layout fragment_add_event
+layout fragment_event_fragment
 layout list_item_event_layout
 layout list_item_month_event_layout
 layout m3_alert_dialog

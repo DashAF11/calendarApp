@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.calendar.R
+import com.example.calendar.databinding.FragmentAddEventBinding
+import com.example.calendar.utils.extension.navigate
+import com.example.calendar.utils.extension.setSafeOnClickListener
 
 class AddEventFragment : Fragment() {
+    private lateinit var binding: FragmentAddEventBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,9 +20,17 @@ class AddEventFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_event, container, false)
+        binding = FragmentAddEventBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnCreate.setSafeOnClickListener {
+            navigate(R.id.eventFragment)
+        }
+    }
 }
