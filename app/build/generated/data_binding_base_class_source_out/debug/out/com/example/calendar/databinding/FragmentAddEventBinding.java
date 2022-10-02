@@ -22,6 +22,9 @@ public final class FragmentAddEventBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final TextView addCalendarEventText;
+
+  @NonNull
   public final Button btnCreate;
 
   @NonNull
@@ -49,9 +52,6 @@ public final class FragmentAddEventBinding implements ViewBinding {
   public final TextView toText;
 
   @NonNull
-  public final TextView tvAddCalendarEvent;
-
-  @NonNull
   public final TextView tvEndTime;
 
   @NonNull
@@ -60,13 +60,15 @@ public final class FragmentAddEventBinding implements ViewBinding {
   @NonNull
   public final TextView tvStartTime;
 
-  private FragmentAddEventBinding(@NonNull ConstraintLayout rootView, @NonNull Button btnCreate,
+  private FragmentAddEventBinding(@NonNull ConstraintLayout rootView,
+      @NonNull TextView addCalendarEventText, @NonNull Button btnCreate,
       @NonNull ConstraintLayout clDate, @NonNull ConstraintLayout clTime,
       @NonNull ConstraintLayout clTitle, @NonNull EditText etMeetingTitle,
       @NonNull TextView meetingDateText, @NonNull TextView meetingText, @NonNull TextView timeText,
-      @NonNull TextView toText, @NonNull TextView tvAddCalendarEvent, @NonNull TextView tvEndTime,
-      @NonNull TextView tvMeetingDate, @NonNull TextView tvStartTime) {
+      @NonNull TextView toText, @NonNull TextView tvEndTime, @NonNull TextView tvMeetingDate,
+      @NonNull TextView tvStartTime) {
     this.rootView = rootView;
+    this.addCalendarEventText = addCalendarEventText;
     this.btnCreate = btnCreate;
     this.clDate = clDate;
     this.clTime = clTime;
@@ -76,7 +78,6 @@ public final class FragmentAddEventBinding implements ViewBinding {
     this.meetingText = meetingText;
     this.timeText = timeText;
     this.toText = toText;
-    this.tvAddCalendarEvent = tvAddCalendarEvent;
     this.tvEndTime = tvEndTime;
     this.tvMeetingDate = tvMeetingDate;
     this.tvStartTime = tvStartTime;
@@ -109,6 +110,12 @@ public final class FragmentAddEventBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.addCalendarEventText;
+      TextView addCalendarEventText = ViewBindings.findChildViewById(rootView, id);
+      if (addCalendarEventText == null) {
+        break missingId;
+      }
+
       id = R.id.btnCreate;
       Button btnCreate = ViewBindings.findChildViewById(rootView, id);
       if (btnCreate == null) {
@@ -163,12 +170,6 @@ public final class FragmentAddEventBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvAddCalendarEvent;
-      TextView tvAddCalendarEvent = ViewBindings.findChildViewById(rootView, id);
-      if (tvAddCalendarEvent == null) {
-        break missingId;
-      }
-
       id = R.id.tvEndTime;
       TextView tvEndTime = ViewBindings.findChildViewById(rootView, id);
       if (tvEndTime == null) {
@@ -187,9 +188,9 @@ public final class FragmentAddEventBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentAddEventBinding((ConstraintLayout) rootView, btnCreate, clDate, clTime,
-          clTitle, etMeetingTitle, meetingDateText, meetingText, timeText, toText,
-          tvAddCalendarEvent, tvEndTime, tvMeetingDate, tvStartTime);
+      return new FragmentAddEventBinding((ConstraintLayout) rootView, addCalendarEventText,
+          btnCreate, clDate, clTime, clTitle, etMeetingTitle, meetingDateText, meetingText,
+          timeText, toText, tvEndTime, tvMeetingDate, tvStartTime);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

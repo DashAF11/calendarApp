@@ -37,7 +37,7 @@ public final class EventDao_Impl implements EventDao {
     this.__insertionAdapterOfEventEntity = new EntityInsertionAdapter<EventEntity>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR REPLACE INTO `EventTable` (`event_name`,`event_date`,`event_start_time`,`event_end_time`,`event_duration`,`event_timestamp`) VALUES (?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `EventTable` (`event_name`,`event_month`,`event_start_time`,`event_end_time`,`event_diff_time`,`event_timestamp`) VALUES (?,?,?,?,?,?)";
       }
 
       @Override
@@ -47,31 +47,11 @@ public final class EventDao_Impl implements EventDao {
         } else {
           stmt.bindString(1, value.getEventName());
         }
-        if (value.getEventMonth() == null) {
-          stmt.bindNull(2);
-        } else {
-          stmt.bindString(2, value.getEventMonth());
-        }
-        if (value.getEventStartTime() == null) {
-          stmt.bindNull(3);
-        } else {
-          stmt.bindString(3, value.getEventStartTime());
-        }
-        if (value.getEventEndTime() == null) {
-          stmt.bindNull(4);
-        } else {
-          stmt.bindString(4, value.getEventEndTime());
-        }
-        if (value.getEventDuration() == null) {
-          stmt.bindNull(5);
-        } else {
-          stmt.bindString(5, value.getEventDuration());
-        }
-        if (value.getEventTimeStamp() == null) {
-          stmt.bindNull(6);
-        } else {
-          stmt.bindString(6, value.getEventTimeStamp());
-        }
+        stmt.bindLong(2, value.getEventMonth());
+        stmt.bindLong(3, value.getEventStartTimestamp());
+        stmt.bindLong(4, value.getEventEndTimestamp());
+        stmt.bindLong(5, value.getEventDiffTimestamp());
+        stmt.bindLong(6, value.getEventTimeStamp());
       }
     };
     this.__deletionAdapterOfEventEntity = new EntityDeletionOrUpdateAdapter<EventEntity>(__db) {
@@ -82,11 +62,7 @@ public final class EventDao_Impl implements EventDao {
 
       @Override
       public void bind(SupportSQLiteStatement stmt, EventEntity value) {
-        if (value.getEventTimeStamp() == null) {
-          stmt.bindNull(1);
-        } else {
-          stmt.bindString(1, value.getEventTimeStamp());
-        }
+        stmt.bindLong(1, value.getEventTimeStamp());
       }
     };
   }
@@ -110,13 +86,13 @@ public final class EventDao_Impl implements EventDao {
   }
 
   @Override
-  public Object delete(final EventEntity soul, final Continuation<? super Unit> continuation) {
+  public Object delete(final EventEntity event, final Continuation<? super Unit> continuation) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __deletionAdapterOfEventEntity.handle(soul);
+          __deletionAdapterOfEventEntity.handle(event);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -136,10 +112,10 @@ public final class EventDao_Impl implements EventDao {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfEventName = CursorUtil.getColumnIndexOrThrow(_cursor, "event_name");
-          final int _cursorIndexOfEventMonth = CursorUtil.getColumnIndexOrThrow(_cursor, "event_date");
-          final int _cursorIndexOfEventStartTime = CursorUtil.getColumnIndexOrThrow(_cursor, "event_start_time");
-          final int _cursorIndexOfEventEndTime = CursorUtil.getColumnIndexOrThrow(_cursor, "event_end_time");
-          final int _cursorIndexOfEventDuration = CursorUtil.getColumnIndexOrThrow(_cursor, "event_duration");
+          final int _cursorIndexOfEventMonth = CursorUtil.getColumnIndexOrThrow(_cursor, "event_month");
+          final int _cursorIndexOfEventStartTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_start_time");
+          final int _cursorIndexOfEventEndTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_end_time");
+          final int _cursorIndexOfEventDiffTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_diff_time");
           final int _cursorIndexOfEventTimeStamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_timestamp");
           final EventEntity _result;
           if(_cursor.moveToFirst()) {
@@ -149,37 +125,17 @@ public final class EventDao_Impl implements EventDao {
             } else {
               _tmpEventName = _cursor.getString(_cursorIndexOfEventName);
             }
-            final String _tmpEventMonth;
-            if (_cursor.isNull(_cursorIndexOfEventMonth)) {
-              _tmpEventMonth = null;
-            } else {
-              _tmpEventMonth = _cursor.getString(_cursorIndexOfEventMonth);
-            }
-            final String _tmpEventStartTime;
-            if (_cursor.isNull(_cursorIndexOfEventStartTime)) {
-              _tmpEventStartTime = null;
-            } else {
-              _tmpEventStartTime = _cursor.getString(_cursorIndexOfEventStartTime);
-            }
-            final String _tmpEventEndTime;
-            if (_cursor.isNull(_cursorIndexOfEventEndTime)) {
-              _tmpEventEndTime = null;
-            } else {
-              _tmpEventEndTime = _cursor.getString(_cursorIndexOfEventEndTime);
-            }
-            final String _tmpEventDuration;
-            if (_cursor.isNull(_cursorIndexOfEventDuration)) {
-              _tmpEventDuration = null;
-            } else {
-              _tmpEventDuration = _cursor.getString(_cursorIndexOfEventDuration);
-            }
-            final String _tmpEventTimeStamp;
-            if (_cursor.isNull(_cursorIndexOfEventTimeStamp)) {
-              _tmpEventTimeStamp = null;
-            } else {
-              _tmpEventTimeStamp = _cursor.getString(_cursorIndexOfEventTimeStamp);
-            }
-            _result = new EventEntity(_tmpEventName,_tmpEventMonth,_tmpEventStartTime,_tmpEventEndTime,_tmpEventDuration,_tmpEventTimeStamp);
+            final int _tmpEventMonth;
+            _tmpEventMonth = _cursor.getInt(_cursorIndexOfEventMonth);
+            final long _tmpEventStartTimestamp;
+            _tmpEventStartTimestamp = _cursor.getLong(_cursorIndexOfEventStartTimestamp);
+            final long _tmpEventEndTimestamp;
+            _tmpEventEndTimestamp = _cursor.getLong(_cursorIndexOfEventEndTimestamp);
+            final long _tmpEventDiffTimestamp;
+            _tmpEventDiffTimestamp = _cursor.getLong(_cursorIndexOfEventDiffTimestamp);
+            final long _tmpEventTimeStamp;
+            _tmpEventTimeStamp = _cursor.getLong(_cursorIndexOfEventTimeStamp);
+            _result = new EventEntity(_tmpEventName,_tmpEventMonth,_tmpEventStartTimestamp,_tmpEventEndTimestamp,_tmpEventDiffTimestamp,_tmpEventTimeStamp);
           } else {
             _result = null;
           }
@@ -197,25 +153,21 @@ public final class EventDao_Impl implements EventDao {
   }
 
   @Override
-  public Flow<List<EventEntity>> getAllEventByMonth(final String month) {
-    final String _sql = "SELECT * FROM EventTable WHERE event_date =?";
+  public Flow<List<EventEntity>> getAllEventByMonth(final int month) {
+    final String _sql = "SELECT * FROM EventTable WHERE event_month =?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
-    if (month == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, month);
-    }
+    _statement.bindLong(_argIndex, month);
     return CoroutinesRoom.createFlow(__db, false, new String[]{"EventTable"}, new Callable<List<EventEntity>>() {
       @Override
       public List<EventEntity> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfEventName = CursorUtil.getColumnIndexOrThrow(_cursor, "event_name");
-          final int _cursorIndexOfEventMonth = CursorUtil.getColumnIndexOrThrow(_cursor, "event_date");
-          final int _cursorIndexOfEventStartTime = CursorUtil.getColumnIndexOrThrow(_cursor, "event_start_time");
-          final int _cursorIndexOfEventEndTime = CursorUtil.getColumnIndexOrThrow(_cursor, "event_end_time");
-          final int _cursorIndexOfEventDuration = CursorUtil.getColumnIndexOrThrow(_cursor, "event_duration");
+          final int _cursorIndexOfEventMonth = CursorUtil.getColumnIndexOrThrow(_cursor, "event_month");
+          final int _cursorIndexOfEventStartTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_start_time");
+          final int _cursorIndexOfEventEndTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_end_time");
+          final int _cursorIndexOfEventDiffTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_diff_time");
           final int _cursorIndexOfEventTimeStamp = CursorUtil.getColumnIndexOrThrow(_cursor, "event_timestamp");
           final List<EventEntity> _result = new ArrayList<EventEntity>(_cursor.getCount());
           while(_cursor.moveToNext()) {
@@ -226,37 +178,17 @@ public final class EventDao_Impl implements EventDao {
             } else {
               _tmpEventName = _cursor.getString(_cursorIndexOfEventName);
             }
-            final String _tmpEventMonth;
-            if (_cursor.isNull(_cursorIndexOfEventMonth)) {
-              _tmpEventMonth = null;
-            } else {
-              _tmpEventMonth = _cursor.getString(_cursorIndexOfEventMonth);
-            }
-            final String _tmpEventStartTime;
-            if (_cursor.isNull(_cursorIndexOfEventStartTime)) {
-              _tmpEventStartTime = null;
-            } else {
-              _tmpEventStartTime = _cursor.getString(_cursorIndexOfEventStartTime);
-            }
-            final String _tmpEventEndTime;
-            if (_cursor.isNull(_cursorIndexOfEventEndTime)) {
-              _tmpEventEndTime = null;
-            } else {
-              _tmpEventEndTime = _cursor.getString(_cursorIndexOfEventEndTime);
-            }
-            final String _tmpEventDuration;
-            if (_cursor.isNull(_cursorIndexOfEventDuration)) {
-              _tmpEventDuration = null;
-            } else {
-              _tmpEventDuration = _cursor.getString(_cursorIndexOfEventDuration);
-            }
-            final String _tmpEventTimeStamp;
-            if (_cursor.isNull(_cursorIndexOfEventTimeStamp)) {
-              _tmpEventTimeStamp = null;
-            } else {
-              _tmpEventTimeStamp = _cursor.getString(_cursorIndexOfEventTimeStamp);
-            }
-            _item = new EventEntity(_tmpEventName,_tmpEventMonth,_tmpEventStartTime,_tmpEventEndTime,_tmpEventDuration,_tmpEventTimeStamp);
+            final int _tmpEventMonth;
+            _tmpEventMonth = _cursor.getInt(_cursorIndexOfEventMonth);
+            final long _tmpEventStartTimestamp;
+            _tmpEventStartTimestamp = _cursor.getLong(_cursorIndexOfEventStartTimestamp);
+            final long _tmpEventEndTimestamp;
+            _tmpEventEndTimestamp = _cursor.getLong(_cursorIndexOfEventEndTimestamp);
+            final long _tmpEventDiffTimestamp;
+            _tmpEventDiffTimestamp = _cursor.getLong(_cursorIndexOfEventDiffTimestamp);
+            final long _tmpEventTimeStamp;
+            _tmpEventTimeStamp = _cursor.getLong(_cursorIndexOfEventTimeStamp);
+            _item = new EventEntity(_tmpEventName,_tmpEventMonth,_tmpEventStartTimestamp,_tmpEventEndTimestamp,_tmpEventDiffTimestamp,_tmpEventTimeStamp);
             _result.add(_item);
           }
           return _result;

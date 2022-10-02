@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "EventTable")
 data class EventEntity(
     @ColumnInfo(name = "event_name") val eventName: String,
-    @ColumnInfo(name = "event_date") val eventMonth: String,
-    @ColumnInfo(name = "event_start_time") val eventStartTime: String,
-    @ColumnInfo(name = "event_end_time") val eventEndTime: String,
-    @ColumnInfo(name = "event_duration") val eventDuration: String,
-    @PrimaryKey @ColumnInfo(name = "event_timestamp") val eventTimeStamp: String
+    @ColumnInfo(name = "event_month") val eventMonth: Int,
+    @ColumnInfo(name = "event_start_time") val eventStartTimestamp: Long,
+    @ColumnInfo(name = "event_end_time") val eventEndTimestamp: Long,
+    @ColumnInfo(name = "event_diff_time") val eventDiffTimestamp: Long,
+    @PrimaryKey(autoGenerate = false) @ColumnInfo(name = "event_timestamp") val eventTimeStamp: Long
 )

@@ -78,6 +78,9 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     //optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
 }
 
 kapt {

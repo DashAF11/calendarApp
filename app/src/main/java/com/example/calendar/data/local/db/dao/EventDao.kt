@@ -12,8 +12,8 @@ interface EventDao {
     @Query("SELECT * FROM EventTable ")
     fun getAllEventMonth(): Flow<EventEntity>
 
-    @Query("SELECT * FROM EventTable WHERE event_date =:month")
-    fun getAllEventByMonth(month: String): Flow<List<EventEntity>>
+    @Query("SELECT * FROM EventTable WHERE event_month =:month")
+    fun getAllEventByMonth(month: Int): Flow<List<EventEntity>>
 
     @Delete
     suspend fun delete(event: EventEntity)

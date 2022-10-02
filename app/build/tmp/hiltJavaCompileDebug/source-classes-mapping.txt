@@ -1,0 +1,4 @@
+com/example/calendar/ApplicationClass_ComponentTreeDeps.java
+ com.example.calendar.ApplicationClass_ComponentTreeDeps
+dagger/hilt/internal/processedrootsentinel/codegen/_com_example_calendar_ApplicationClass.java
+ dagger.hilt.internal.processedrootsentinel.codegen._com_example_calendar_ApplicationClass

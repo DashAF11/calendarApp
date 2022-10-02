@@ -9,7 +9,7 @@
     tools:context=".presenter.ui.fragment.AddEventFragment">
 
     <TextView
-        android:id="@+id/tvAddCalendarEvent"
+        android:id="@+id/addCalendarEventText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_background_yellow"
@@ -30,7 +30,7 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddCalendarEvent">
+        app:layout_constraintTop_toBottomOf="@+id/addCalendarEventText">
 
         <TextView
             android:id="@+id/meetingText"

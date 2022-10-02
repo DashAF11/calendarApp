@@ -3,6 +3,8 @@ package com.example.calendar.utils.extension
 import android.app.Activity
 import android.content.Context
 import android.view.View
+import android.view.animation.CycleInterpolator
+import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
@@ -16,7 +18,7 @@ fun View.gone() {
 }
 
 val EditText.string: String
-    get() = text?.toString() ?: ""
+    get() = text?.toString()?.trim() ?: ""
 
 fun Activity.hideKeyboard() {
     hideKeyboard(currentFocus ?: View(this))
@@ -36,6 +38,13 @@ fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
         onSafeClick(it)
     }
     setOnClickListener(safeClickListener)
+}
+
+fun shakeError(): TranslateAnimation {
+    val shake = TranslateAnimation(0f, 30f, 0f, 0f)
+    shake.duration = 300
+    shake.interpolator = CycleInterpolator(2f)
+    return shake
 }
 
 

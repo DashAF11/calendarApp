@@ -35,9 +35,9 @@ public final class EventDatabase_Impl extends EventDatabase {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `EventTable` (`event_name` TEXT NOT NULL, `event_date` TEXT NOT NULL, `event_start_time` TEXT NOT NULL, `event_end_time` TEXT NOT NULL, `event_duration` TEXT NOT NULL, `event_timestamp` TEXT NOT NULL, PRIMARY KEY(`event_timestamp`))");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `EventTable` (`event_name` TEXT NOT NULL, `event_month` INTEGER NOT NULL, `event_start_time` INTEGER NOT NULL, `event_end_time` INTEGER NOT NULL, `event_diff_time` INTEGER NOT NULL, `event_timestamp` INTEGER NOT NULL, PRIMARY KEY(`event_timestamp`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '24601035c15146c54b414473faee6386')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd748c8baf5c301fd6a17bba0d1b2cc67')");
       }
 
       @Override
@@ -83,11 +83,11 @@ public final class EventDatabase_Impl extends EventDatabase {
       protected RoomOpenHelper.ValidationResult onValidateSchema(SupportSQLiteDatabase _db) {
         final HashMap<String, TableInfo.Column> _columnsEventTable = new HashMap<String, TableInfo.Column>(6);
         _columnsEventTable.put("event_name", new TableInfo.Column("event_name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsEventTable.put("event_date", new TableInfo.Column("event_date", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsEventTable.put("event_start_time", new TableInfo.Column("event_start_time", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsEventTable.put("event_end_time", new TableInfo.Column("event_end_time", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsEventTable.put("event_duration", new TableInfo.Column("event_duration", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsEventTable.put("event_timestamp", new TableInfo.Column("event_timestamp", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsEventTable.put("event_month", new TableInfo.Column("event_month", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsEventTable.put("event_start_time", new TableInfo.Column("event_start_time", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsEventTable.put("event_end_time", new TableInfo.Column("event_end_time", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsEventTable.put("event_diff_time", new TableInfo.Column("event_diff_time", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsEventTable.put("event_timestamp", new TableInfo.Column("event_timestamp", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysEventTable = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesEventTable = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoEventTable = new TableInfo("EventTable", _columnsEventTable, _foreignKeysEventTable, _indicesEventTable);
@@ -99,7 +99,7 @@ public final class EventDatabase_Impl extends EventDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "24601035c15146c54b414473faee6386", "fec06fcb1afedf820bf4ac92bdfabca9");
+    }, "d748c8baf5c301fd6a17bba0d1b2cc67", "539a9def6c60f695a861fe48ec1b9aa6");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
