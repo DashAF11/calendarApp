@@ -1,4 +1,4 @@
-package com.example.calendar.ui.fragment
+package com.example.calendar.presenter.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 

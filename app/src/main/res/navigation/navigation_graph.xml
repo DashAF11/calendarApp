@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/eventFragment"
-        android:name="com.example.calendar.ui.fragment.EventFragment"
+        android:name="com.example.calendar.presenter.ui.fragment.EventFragment"
         android:label="event_fragment"
         tools:layout="@layout/event_fragment">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/addEventFragment"
-        android:name="com.example.calendar.ui.fragment.AddEventFragment"
+        android:name="com.example.calendar.presenter.ui.fragment.AddEventFragment"
         android:label="fragment_add_event"
         tools:layout="@layout/fragment_add_event" />
 </navigation>
